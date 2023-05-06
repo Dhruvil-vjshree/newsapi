@@ -1,16 +1,16 @@
 class Article{
-  final String author;
+  final String? author;  //? that mean optional niche required remove krie to ahiya ? lgavo pde
   final String title;
-  final String description;
-  final String urlToImage;
+  final String? description;
+  final String? urlToImage;
   final String publishedAt;
 
 
  Article ({
-  required this.author,
+   this.author,
   required this.title,
-  required this.description,
-  required this.urlToImage,
+   this.description,
+   this.urlToImage,
   required this.publishedAt,
 });
 

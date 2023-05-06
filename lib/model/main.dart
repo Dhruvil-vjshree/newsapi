@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:newsapi/service/apiService.dart';
 
@@ -46,13 +48,52 @@ class _MyHomePageState extends State<MyHomePage> {
       body: FutureBuilder(
         future: ApiService().getArticle(),
           builder : (BuildContext context, AsyncSnapshot<List<Article>> snapshot){
-          if(snapshot.hasData){
-            return Text('hurrey');
-          }
-          return Center(child: CircularProgressIndicator());
-          }
+          if(snapshot.hasData) {
+            return ListView.builder(
+                itemCount: snapshot.data!.length,
+                itemBuilder: (BuildContext context, index) {
+                  return Card(
+                      elevation: 5,
+                      child: Column(
+                        children: [
 
-      )
+                          Image.network(
+
+                            '${snapshot.data![index].urlToImage}',
+                          ),
+
+                          Text('${snapshot.data![index].title}',
+                            style: TextStyle(fontSize: 21),
+                          ),
+                          SizedBox(
+                            height: 4,
+                          ),
+
+                          Text('${snapshot.data![index].description}',
+                            maxLines: 2,overflow: TextOverflow.ellipsis),
+
+
+                            ],
+
+
+
+                          ),
+
+
+
+
+
+
+                  );
+                });
+
+            }
+
+          return Center(child: CircularProgressIndicator());
+          },
+
+
+      ),
 
 
     );
